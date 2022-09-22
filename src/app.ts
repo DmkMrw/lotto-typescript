@@ -3,6 +3,7 @@ import inquirer from 'inquirer';
 
 const chosenNumbers: number[] = [];
 const randomNumbers: number[] = [];
+const correctNumbers: number[] = [];
 
 const startApp = async (): Promise<void> => {
   do {
@@ -53,6 +54,7 @@ const checkTheSameNumbers = () => {
   let result:number = 0;
   for (let i = 0; i < randomNumbers.length; i++) {
     if (chosenNumbers.includes(randomNumbers[i])) {
+      correctNumbers.push(randomNumbers[i]);
       result++;
     }
   }
@@ -60,7 +62,7 @@ const checkTheSameNumbers = () => {
 };
 
 const printResult = (): void => {
-    console.log(`You have ${checkTheSameNumbers()} correct numbers`);
+  console.log(`You have ${checkTheSameNumbers()} correct ${correctNumbers.length < 1 ? 'number' : 'numbers'} ${correctNumbers.length === 0 ? '' : `=> ${correctNumbers}`}`);
 };
 
 startApp();
