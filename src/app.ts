@@ -1,5 +1,5 @@
 import inquirer from 'inquirer';
-
+import { PromptResult } from './interface';
 
 const chosenNumbers: number[] = [];
 const randomNumbers: number[] = [];
@@ -7,7 +7,7 @@ const correctNumbers: number[] = [];
 
 const startApp = async (): Promise<void> => {
   do {
-    const result = await inquirer.prompt([{
+    const result:PromptResult = await inquirer.prompt([{
       name: 'number',
       type: 'input',
       message: 'Podaj liczbę...'
@@ -51,7 +51,7 @@ do {
 } while (randomNumbers.length < 6);
 
 const checkTheSameNumbers = () => {
-  let result:number = 0;
+  let result: number = 0;
   for (let i = 0; i < randomNumbers.length; i++) {
     if (chosenNumbers.includes(randomNumbers[i])) {
       correctNumbers.push(randomNumbers[i]);
@@ -62,7 +62,7 @@ const checkTheSameNumbers = () => {
 };
 
 const printResult = (): void => {
-  console.log(`You have ${checkTheSameNumbers()} correct ${correctNumbers.length < 1 ? 'number' : 'numbers'} ${correctNumbers.length === 0 ? '' : `=> ${correctNumbers}`}`);
+  console.log(`You have ${checkTheSameNumbers()} correct ${correctNumbers.length <= 1 ? 'number' : 'numbers'} ${correctNumbers.length === 0 ? '' : `=> ${correctNumbers}`}`);
 };
 
 startApp();
